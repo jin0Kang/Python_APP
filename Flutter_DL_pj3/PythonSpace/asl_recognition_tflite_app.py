@@ -5,7 +5,7 @@ from PIL import Image
 import numpy as np
 import tensorflow as tf
 import requests
-from datetime import datetime
+from datetime import datetime,timedelta
 from pytimekr import pytimekr
 import pandas as pd
 import math
@@ -133,11 +133,11 @@ def get_weather(today,date):
 
     if int(today_time[:2]) % 3 !=  2:
         if int(today_time[:2]) < 2:
-            today = datetime(int(today_day[:4]),int(today_day[4:6]),int(today_day[6:]), int(today_time[:2],00,00,0 ) + timedelta(hours=(-int(today_time[:2])-1)))
+            today = str(datetime(int(today_day[:4]),int(today_day[4:6]),int(today_day[6:]), int(today_time[:2],00,00,0 ) + timedelta(hours=(-int(today_time[:2])-1))))
             today_day = today.split()[0].replace('-','')
             today_time = today.split()[1].replace(':','')
         else:
-            today = datetime(int(today_day[:4]),int(today_day[4:6]),int(today_day[6:]), int(today_time[:2],00,00,0 ) + timedelta(hours=(-(int(today_time[:2])%3)-1)))
+            today = str(datetime(int(today_day[:4]),int(today_day[4:6]),int(today_day[6:]), int(today_time[:2]),00,00,0 )  + timedelta(hours=(-(int(today_time[:2])%3)-1)))
             today_day = today.split()[0].replace('-','')
             today_time = today.split()[1].replace(':','')
     print(today_day, today_time)
